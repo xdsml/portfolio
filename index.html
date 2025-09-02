@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Ismail Gherram</title>
+  <style>
+    :root {
+      --bg: #f4f4f9;
+      --text: #333;
+      --primary: #3498db;
+      --header: #2c3e50;
+    }
+
+    body.dark {
+      --bg: #1e1e1e;
+      --text: #eee;
+      --primary: #9b59b6;
+      --header: #111;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--header);
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+    }
+    header h1 { margin: 0; font-size: 2.5em; }
+    header p { font-size: 1.2em; }
+
+    #toggleMode {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    nav {
+      background: #34495e;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .certificate img {
+  width: 100%;
+  max-width: 400px; /* tu peux ajuster selon ton design */
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin-top: 10px;
+}
+
+    nav a:hover { text-decoration: underline; }
+
+    section { opacity: 1 !important; transform: translateY(0) !important; }
+
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: var(--header);
+      border-left: 5px solid var(--primary);
+      padding-left: 10px;
+    }
+
+    .project, .certificate {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 20px 0;
+      transition: transform 0.3s;
+    }
+    .project:hover, .certificate:hover {
+      transform: scale(1.02);
+    }
+    body.dark .project, body.dark .certificate {
+      background: #2a2a2a;
+      box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+    }
+    .project h3, .certificate h3 { color: var(--primary); }
+
+    .project img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+    .skill {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      transition: transform 0.3s;
+    }
+    .skill:hover { transform: scale(1.05); }
+
+    footer {
+      background: var(--header);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    footer a {
+      color: var(--primary);
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button id="toggleMode">🌙 Mode sombre</button>
+    <h1>Ismail Gherram</h1>
+    <p>Étudiant ingénieur en informatique | Développement Web & Mobile</p>
+  </header>
+
+  <nav>
+    <a href="#about">À propos</a>
+    <a href="#projects">Projets</a>
+    <a href="#skills">Compétences</a>
+    <a href="#certificates">Certificats</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>À propos</h2>
+    <p>Je suis étudiant ingénieur passionné par le développement web et mobile. J’ai travaillé sur plusieurs projets académiques et personnels, en équipe comme en individuel, utilisant différentes technologies modernes. Je recherche actuellement un stage PFE en informatique pour mettre mes compétences en pratique et contribuer à des projets concrets.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Mes Projets</h2>
+
+    <div class="project">
+      <h3>VitalityVista 🏋️‍♂️</h3>
+      <p>PFA (3ème année) : plateforme de gestion d’un complexe sportif.</p>
+      <p><strong>Mon rôle :</strong> Développement en PHP & SQL</p>
+      <p><strong>Équipe :</strong> Java, C++ (intégration multi-technologies)</p>
+      <img src="images/acceuill.png" alt="VitalityVista">
+      <img src="images/contacternous.png" alt="VitalityVista">
+      <img src="images/abbonement.png" alt="VitalityVista">
+      <img src="images/inscription.png" alt="VitalityVista">
+      <a href="https://github.com/xdsml/gestion_de_complexe_sportif" target="_blank">Voir sur GitHub</a>
+    </div>
+
+    <div class="project">
+      <h3>Tourism App 🌍</h3>
+      <p>Application mobile pour touristes : recherche de monuments, restaurants, cafés, hôtels + QR code pour gagner des points, classement des matchs, espace admin.</p>
+      <p><strong>Technologies :</strong> .NET MAUI, Firebase, Cloudinary, GitHub</p>
+      <img src="images/acceuillmobil.png" alt="Tourism App">
+      <img src="images/accmobil.png" alt="Tourism App">
+      <img src="images/contactmobil.png" alt="Tourism App">
+      <img src="images/hotel.png" alt="Tourism App">
+      <a href="https://github.com/xdsml/Tourism" target="_blank">Voir sur GitHub</a>
+    </div>
+
+    <div class="project">
+      <h3>Reservation Stades ⚽</h3>
+      <p>Application web JEE : les utilisateurs peuvent réserver un stade pour jouer. Si le stade est occupé, la réservation est bloquée.</p>
+      <p><strong>Technologies :</strong> Java JEE, SQL</p>
+      <img src="images/conjee.png" alt="Reservation Stades">
+      <img src="images/inscripjee.png" alt="Reservation Stades">
+      <img src="images/choixjee.png" alt="Reservation Stades">
+      <img src="images/reservejee.png" alt="Reservation Stades">
+      <a href="https://github.com/xdsml/Reservation-Stades-JEE-" target="_blank">Voir sur GitHub</a>
+    </div>
+
+    <div class="project">
+      <h3>Projet DevOps / Symfony ⚙️</h3>
+      <p>Projet intégrant des pratiques DevOps avec Symfony. Mise en place d’une CI/CD complète et supervision de l’application.</p>
+      <p><strong>Technologies :</strong> Symfony, Jenkins, Docker, Grafana, Prometheus, Nginx, SQL Server, Ansible</p>
+      <img src="images/flos.jpg" alt="Reservation Stades">
+      <img src="images/IMG-20250901-WA0013.jpg" alt="Reservation Stades">
+      <img src="images/IMG-20250901-WA0014.jpg" alt="Reservation Stades">
+      <img src="images/IMG-20250901-WA0018.jpg" alt="Reservation Stades">
+      <a href="https://github.com/xdsml/symfony-crud-devops" target="_blank">Voir sur GitHub</a>
+    </div>
+
+  </section>
+
+  
+
+  <section id="certificates">
+    <h2>Certificats</h2>
+    <div class="certificate">
+      <h3>Data Analysis with Python</h3>
+      <p>freeCodeCamp</p>
+      <p><strong>Année :</strong> 2025</p>
+       <img src="images/certficat Data Analysis with Python.png" alt="certificate ">
+    </div>
+  </section>
+<section id="skills">
+    <h2>Compétences</h2>
+    <div class="skills">
+      <div class="skill">Java</div>
+      <div class="skill">PHP / .NET</div>
+      <div class="skill">Python</div>
+      <div class="skill">C / C++</div>
+      <div class="skill">JEE</div>
+      <div class="skill">.NET MAUI</div>
+      <div class="skill">HTML / CSS / JS</div>
+      <div class="skill">SQL & SQL Server</div>
+      <div class="skill">Merise / UML</div>
+      <div class="skill">Git / GitHub</div>
+    </div>
+  </section>
+  <footer id="contact">
+    <p>📧 Email : ismailgherram7@gmail.com</p>
+    <p>
+      <a href="https://www.linkedin.com/in/ismail-gherram-3536b4314/" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/xdsml" target="_blank">GitHub</a>
+    </p>
+    <p>&copy; 2025 - Portfolio Ismail Gherram</p>
+  </footer>
+
+  <script>
+    const btn = document.getElementById("toggleMode");
+    btn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      btn.textContent = document.body.classList.contains("dark") ? "☀️ Mode clair" : "🌙 Mode sombre";
+    });
+
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
