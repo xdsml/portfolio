@@ -4,269 +4,386 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio - Ismail Gherram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f4f4f9;
-      --text: #333;
+      --bg: linear-gradient(135deg, #f0f4ff, #e8f0fe);
+      --text: #2c3e50;
       --primary: #3498db;
-      --header: #2c3e50;
+      --accent: #9b59b6;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --shadow: rgba(0, 0, 0, 0.1);
     }
 
     body.dark {
-      --bg: #1e1e1e;
-      --text: #eee;
+      --bg: linear-gradient(135deg, #141414, #1f1f1f);
+      --text: #f5f5f5;
       --primary: #9b59b6;
-      --header: #111;
+      --accent: #3498db;
+      --card-bg: rgba(40, 40, 40, 0.8);
+      --shadow: rgba(255, 255, 255, 0.05);
     }
 
+    * { box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Poppins", sans-serif;
       margin: 0;
-      padding: 0;
       background: var(--bg);
       color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      transition: all 0.3s ease;
     }
 
     header {
-      background: var(--header);
-      color: #fff;
       text-align: center;
-      padding: 50px 20px;
+      padding: 100px 20px 60px;
+      background: var(--primary);
+      color: #fff;
       position: relative;
     }
-    header h1 { margin: 0; font-size: 2.5em; }
-    header p { font-size: 1.2em; }
+    header h1 { font-size: 3em; margin-bottom: 10px; }
+    header p { font-size: 1.2em; opacity: 0.9; }
 
     #toggleMode {
       position: absolute;
-      top: 15px;
+      top: 20px;
       right: 20px;
-      background: var(--primary);
+      background: #fff;
+      color: var(--primary);
       border: none;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 25px;
       cursor: pointer;
+      transition: all 0.3s;
+    }
+    #toggleMode:hover {
+      transform: scale(1.05);
+      background: var(--accent);
+      color: #fff;
     }
 
     nav {
-      background: #34495e;
-      padding: 10px;
       text-align: center;
+      padding: 15px 0;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     nav a {
-      color: #fff;
-      margin: 0 15px;
+      color: var(--primary);
       text-decoration: none;
-      font-weight: bold;
+      margin: 0 15px;
+      font-weight: 600;
+      transition: color 0.3s;
     }
-    .certificate img {
-  width: 100%;
-  max-width: 400px; /* tu peux ajuster selon ton design */
-  height: auto;
-  border-radius: 8px;
-  display: block;
-  margin-top: 10px;
-}
-
-    nav a:hover { text-decoration: underline; }
-
-    section { opacity: 1 !important; transform: translateY(0) !important; }
+    nav a:hover { color: var(--accent); }
 
     section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 20px;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
       transition: all 0.6s ease-out;
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    section.visible { opacity: 1; transform: translateY(0); }
 
     h2 {
-      color: var(--header);
-      border-left: 5px solid var(--primary);
-      padding-left: 10px;
+      font-size: 2em;
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 40px;
+      position: relative;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -10px;
+      border-radius: 2px;
     }
 
     .project, .certificate {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin: 20px 0;
-      transition: transform 0.3s;
+      background: var(--card-bg);
+      box-shadow: 0 4px 20px var(--shadow);
+      border-radius: 16px;
+      padding: 25px;
+      margin: 30px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
     }
     .project:hover, .certificate:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px var(--shadow);
     }
-    body.dark .project, body.dark .certificate {
-      background: #2a2a2a;
-      box-shadow: 0 2px 8px rgba(255,255,255,0.05);
-    }
-    .project h3, .certificate h3 { color: var(--primary); }
 
-    .project img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 8px;
-      display: block;
-      margin-bottom: 10px;
+    /* Slider */
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 12px;
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 10;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .prev:hover, .next:hover { background: rgba(0,0,0,0.7); }
+
+    /* Bouton GitHub flottant */
+    .slider a.github-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--primary);
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 25px;
+      font-weight: 600;
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .slider:hover a.github-btn { opacity: 1; transform: translateY(0); }
+    .slider a.github-btn:hover { background: var(--accent); }
 
     .skills {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
     }
     .skill {
       background: var(--primary);
       color: white;
+      padding: 12px;
       text-align: center;
-      padding: 10px;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-weight: 600;
       transition: transform 0.3s;
     }
     .skill:hover { transform: scale(1.05); }
 
     footer {
-      background: var(--header);
-      color: white;
+      background: var(--primary);
+      color: #fff;
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
+      margin-top: 80px;
     }
     footer a {
-      color: var(--primary);
+      color: #fff;
       margin: 0 10px;
       text-decoration: none;
+      font-weight: bold;
     }
-    footer a:hover { text-decoration: underline; }
+    footer a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
 
-  <header>
-    <button id="toggleMode">🌙 Mode sombre</button>
-    <h1>Ismail Gherram</h1>
-    <p>Étudiant ingénieur en informatique | Développement Web & Mobile</p>
-  </header>
+<header>
+  <button id="toggleMode">🌙 Mode sombre</button>
+  <h1>Ismail Gherram</h1>
+  <p>Étudiant ingénieur en informatique | Développement Web & Mobile</p>
+</header>
 
-  <nav>
-    <a href="#about">À propos</a>
-    <a href="#projects">Projets</a>
-    <a href="#skills">Compétences</a>
-    <a href="#certificates">Certificats</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<nav>
+  <a href="#about">À propos</a>
+  <a href="#projects">Projets</a>
+  <a href="#skills">Compétences</a>
+  <a href="#certificates">Certificats</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-  <section id="about">
-    <h2>À propos</h2>
-    <p>Je suis étudiant ingénieur passionné par le développement web et mobile. J’ai travaillé sur plusieurs projets académiques et personnels, en équipe comme en individuel, utilisant différentes technologies modernes. Je recherche actuellement un stage PFE en informatique pour mettre mes compétences en pratique et contribuer à des projets concrets.</p>
-  </section>
+<section id="about">
+  <h2>À propos</h2>
+  <p style="text-align:center; max-width:800px; margin:auto;">
+    Je suis étudiant ingénieur passionné par le développement web et mobile. J’ai travaillé sur plusieurs projets académiques et personnels, en équipe comme en individuel, utilisant différentes technologies modernes. Je recherche actuellement un stage PFE en informatique pour mettre mes compétences en pratique et contribuer à des projets concrets.
+  </p>
+</section>
 
-  <section id="projects">
-    <h2>Mes Projets</h2>
+<section id="projects">
+  <h2>Mes Projets</h2>
 
-    <div class="project">
-      <h3>VitalityVista 🏋️‍♂️</h3>
-      <p>PFA (3ème année) : plateforme de gestion d’un complexe sportif.</p>
-      <p><strong>Mon rôle :</strong> Développement en PHP & SQL</p>
-      <p><strong>Équipe :</strong> Java, C++ (intégration multi-technologies)</p>
-      <img src="images/acceuill.png" alt="VitalityVista">
-      <img src="images/contacternous.png" alt="VitalityVista">
-      <img src="images/abbonement.png" alt="VitalityVista">
-      <img src="images/inscription.png" alt="VitalityVista">
-      <a href="https://github.com/xdsml/gestion_de_complexe_sportif" target="_blank">Voir sur GitHub</a>
+  <!-- VitalityVista -->
+  <div class="project">
+    <h3>VitalityVista 🏋️‍♂️</h3>
+    <p>PFA (3ème année) : plateforme de gestion d’un complexe sportif.</p>
+    <p><strong>Mon rôle :</strong> Développement en PHP & SQL</p>
+    <p><strong>Équipe :</strong> Java, C++ (intégration multi-technologies)</p>
+
+    <div class="slider">
+      <div class="slides">
+        <img src="images/acceuill.png" alt="VitalityVista">
+        <img src="images/contacternous.png" alt="VitalityVista">
+        <img src="images/abbonement.png" alt="VitalityVista">
+        <img src="images/inscription.png" alt="VitalityVista">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+      <a href="https://github.com/xdsml/gestion_de_complexe_sportif" target="_blank" class="github-btn">Voir GitHub</a>
     </div>
+  </div>
 
-    <div class="project">
-      <h3>Tourism App 🌍</h3>
-      <p>Application mobile pour touristes : recherche de monuments, restaurants, cafés, hôtels + QR code pour gagner des points, classement des matchs, espace admin.</p>
-      <p><strong>Technologies :</strong> .NET MAUI, Firebase, Cloudinary, GitHub</p>
-      <img src="images/acceuillmobil.png" alt="Tourism App">
-      <img src="images/accmobil.png" alt="Tourism App">
-      <img src="images/contactmobil.png" alt="Tourism App">
-      <img src="images/hotel.png" alt="Tourism App">
-      <a href="https://github.com/xdsml/Tourism" target="_blank">Voir sur GitHub</a>
+  <!-- Tourism App -->
+  <div class="project">
+    <h3>Tourism App 🌍</h3>
+    <p>Application mobile pour touristes : recherche de monuments, restaurants, cafés, hôtels + QR code pour gagner des points, classement des matchs, espace admin.</p>
+    <p><strong>Technologies :</strong> .NET MAUI, Firebase, Cloudinary, GitHub</p>
+
+    <div class="slider">
+      <div class="slides">
+        <img src="images/acceuillmobil.png" alt="Tourism App">
+        <img src="images/accmobil.png" alt="Tourism App">
+        <img src="images/contactmobil.png" alt="Tourism App">
+        <img src="images/hotel.png" alt="Tourism App">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+      <a href="https://github.com/xdsml/Tourism" target="_blank" class="github-btn">Voir GitHub</a>
     </div>
+  </div>
 
-    <div class="project">
-      <h3>Reservation Stades ⚽</h3>
-      <p>Application web JEE : les utilisateurs peuvent réserver un stade pour jouer. Si le stade est occupé, la réservation est bloquée.</p>
-      <p><strong>Technologies :</strong> Java JEE, SQL</p>
-      <img src="images/conjee.png" alt="Reservation Stades">
-      <img src="images/inscripjee.png" alt="Reservation Stades">
-      <img src="images/choixjee.png" alt="Reservation Stades">
-      <img src="images/reservejee.png" alt="Reservation Stades">
-      <a href="https://github.com/xdsml/Reservation-Stades-JEE-" target="_blank">Voir sur GitHub</a>
+  <!-- Reservation Stades -->
+  <div class="project">
+    <h3>Reservation Stades ⚽</h3>
+    <p>Application web JEE : les utilisateurs peuvent réserver un stade pour jouer. Si le stade est occupé, la réservation est bloquée.</p>
+    <p><strong>Technologies :</strong> Java JEE, SQL</p>
+
+    <div class="slider">
+      <div class="slides">
+        <img src="images/conjee.png" alt="Reservation Stades">
+        <img src="images/inscripjee.png" alt="Reservation Stades">
+        <img src="images/choixjee.png" alt="Reservation Stades">
+        <img src="images/reservejee.png" alt="Reservation Stades">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+      <a href="https://github.com/xdsml/Reservation-Stades-JEE-" target="_blank" class="github-btn">Voir GitHub</a>
     </div>
+  </div>
 
-    <div class="project">
-      <h3>Projet DevOps / Symfony ⚙️</h3>
-      <p>Projet intégrant des pratiques DevOps avec Symfony. Mise en place d’une CI/CD complète et supervision de l’application.</p>
-      <p><strong>Technologies :</strong> Symfony, Jenkins, Docker, Grafana, Prometheus, Nginx, SQL Server, Ansible</p>
-      <img src="images/flos.jpg" alt="Reservation Stades">
-      <img src="images/IMG-20250901-WA0013.jpg" alt="Reservation Stades">
-      <img src="images/IMG-20250901-WA0014.jpg" alt="Reservation Stades">
-      <img src="images/IMG-20250901-WA0018.jpg" alt="Reservation Stades">
-      <a href="https://github.com/xdsml/symfony-crud-devops" target="_blank">Voir sur GitHub</a>
+  <!-- DevOps / Symfony -->
+  <div class="project">
+    <h3>Projet DevOps / Symfony ⚙️</h3>
+    <p>Projet intégrant des pratiques DevOps avec Symfony. Mise en place d’une CI/CD complète et supervision de l’application.</p>
+    <p><strong>Technologies :</strong> Symfony, Jenkins, Docker, Grafana, Prometheus, Nginx, SQL Server, Ansible</p>
+
+    <div class="slider">
+      <div class="slides">
+        <img src="images/flos.jpg" alt="DevOps Project">
+        <img src="images/IMG-20250901-WA0013.jpg" alt="DevOps Project">
+        <img src="images/IMG-20250901-WA0014.jpg" alt="DevOps Project">
+        <img src="images/IMG-20250901-WA0018.jpg" alt="DevOps Project">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+      <a href="https://github.com/xdsml/symfony-crud-devops" target="_blank" class="github-btn">Voir GitHub</a>
     </div>
+  </div>
 
-  </section>
+</section>
 
-  
+<section id="certificates">
+  <h2>Certificats</h2>
+  <div class="certificate">
+    <h3>Data Analysis with Python</h3>
+    <p>freeCodeCamp | Année : 2025</p>
+    <img src="images/certficat Data Analysis with Python.png" alt="certificate">
+  </div>
+</section>
 
-  <section id="certificates">
-    <h2>Certificats</h2>
-    <div class="certificate">
-      <h3>Data Analysis with Python</h3>
-      <p>freeCodeCamp</p>
-      <p><strong>Année :</strong> 2025</p>
-       <img src="images/certficat Data Analysis with Python.png" alt="certificate ">
-    </div>
-  </section>
 <section id="skills">
-    <h2>Compétences</h2>
-    <div class="skills">
-      <div class="skill">Java</div>
-      <div class="skill">PHP / .NET</div>
-      <div class="skill">Python</div>
-      <div class="skill">C / C++</div>
-      <div class="skill">JEE</div>
-      <div class="skill">.NET MAUI</div>
-      <div class="skill">HTML / CSS / JS</div>
-      <div class="skill">SQL & SQL Server</div>
-      <div class="skill">Merise / UML</div>
-      <div class="skill">Git / GitHub</div>
-    </div>
-  </section>
-  <footer id="contact">
-    <p>📧 Email : ismailgherram7@gmail.com</p>
-    <p>
-      <a href="https://www.linkedin.com/in/ismail-gherram-3536b4314/" target="_blank">LinkedIn</a> |
-      <a href="https://github.com/xdsml" target="_blank">GitHub</a>
-    </p>
-    <p>&copy; 2025 - Portfolio Ismail Gherram</p>
-  </footer>
+  <h2>Compétences</h2>
+  <div class="skills">
+    <div class="skill">Java</div>
+    <div class="skill">PHP / .NET</div>
+    <div class="skill">Python</div>
+    <div class="skill">C / C++</div>
+    <div class="skill">JEE</div>
+    <div class="skill">.NET MAUI</div>
+    <div class="skill">HTML / CSS / JS</div>
+    <div class="skill">SQL & SQL Server</div>
+    <div class="skill">Merise / UML</div>
+    <div class="skill">Git / GitHub</div>
+  </div>
+</section>
 
-  <script>
-    const btn = document.getElementById("toggleMode");
-    btn.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      btn.textContent = document.body.classList.contains("dark") ? "☀️ Mode clair" : "🌙 Mode sombre";
+<footer id="contact">
+  <p>📧 Email : ismailgherram7@gmail.com</p>
+  <p>
+    <a href="https://www.linkedin.com/in/ismail-gherram-3536b4314/" target="_blank">LinkedIn</a> |
+    <a href="https://github.com/xdsml" target="_blank">GitHub</a>
+  </p>
+  <p>&copy; 2025 - Portfolio Ismail Gherram</p>
+</footer>
+
+<script>
+  // Mode sombre
+  const btn = document.getElementById("toggleMode");
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    btn.textContent = document.body.classList.contains("dark") ? "☀️ Mode clair" : "🌙 Mode sombre";
+  });
+
+  // Animation des sections
+  const sections = document.querySelectorAll("section");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add("visible");
     });
+  }, { threshold: 0.2 });
+  sections.forEach(section => observer.observe(section));
 
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
-  </script>
+  // Sliders
+  document.querySelectorAll('.project').forEach(project => {
+    const slides = project.querySelector('.slides');
+    const imgs = slides.querySelectorAll('img');
+    let index = 0;
+
+    const prev = project.querySelector('.prev');
+    const next = project.querySelector('.next');
+
+    function showSlide(i) {
+      if(i < 0) index = imgs.length - 1;
+      else if(i >= imgs.length) index = 0;
+      else index = i;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    prev.addEventListener('click', () => showSlide(index - 1));
+    next.addEventListener('click', () => showSlide(index + 1));
+
+    setInterval(() => showSlide(index + 1), 5000);
+  });
+</script>
+
 </body>
 </html>
