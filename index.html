@@ -1,209 +1,121 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio - Ismail Gherram</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: linear-gradient(135deg, #f0f4ff, #e8f0fe);
-      --text: #2c3e50;
-      --primary: #3498db;
-      --accent: #9b59b6;
-      --card-bg: rgba(255, 255, 255, 0.8);
-      --shadow: rgba(0, 0, 0, 0.1);
+    :root{
+      --bg:linear-gradient(135deg,#f0f4ff,#e8f0fe);
+      --text:#2c3e50;
+      --primary:#3498db;
+      --accent:#9b59b6;
+      --card-bg:rgba(255,255,255,0.8);
+      --shadow:rgba(0,0,0,0.1);
+    }
+    body.dark{
+      --bg:linear-gradient(135deg,#141414,#1f1f1f);
+      --text:#f5f5f5;
+      --primary:#9b59b6;
+      --accent:#3498db;
+      --card-bg:rgba(40,40,40,0.8);
+      --shadow:rgba(255,255,255,0.05);
     }
 
-    body.dark {
-      --bg: linear-gradient(135deg, #141414, #1f1f1f);
-      --text: #f5f5f5;
-      --primary: #9b59b6;
-      --accent: #3498db;
-      --card-bg: rgba(40, 40, 40, 0.8);
-      --shadow: rgba(255, 255, 255, 0.05);
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Poppins",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition:all .3s ease;
     }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      transition: all 0.3s ease;
+    header{
+      text-align:center;
+      padding:100px 20px 60px;
+      background:var(--primary);
+      color:#fff;
+      position:relative;
+    }
+    header h1{font-size:3em;margin-bottom:10px}
+    header p{font-size:1.2em;opacity:.9}
+
+    #toggleMode{
+      position:absolute;top:20px;right:20px;
+      background:#fff;color:var(--primary);
+      border:none;font-weight:600;
+      padding:10px 20px;border-radius:25px;
+      cursor:pointer;transition:all .3s;
+    }
+    #toggleMode:hover{transform:scale(1.05);background:var(--accent);color:#fff}
+
+    nav{
+      text-align:center;padding:15px 0;
+      background:var(--card-bg);backdrop-filter:blur(10px);
+      position:sticky;top:0;z-index:100;
+    }
+    nav a{
+      color:var(--primary);text-decoration:none;margin:0 15px;
+      font-weight:600;transition:color .3s;
+    }
+    nav a:hover{color:var(--accent)}
+
+    /* ✅ visibles par défaut (fini la page vide) */
+    section{
+      max-width:1000px;margin:80px auto;padding:20px;
+      opacity:1;transform:none;transition:all .6s ease-out;
+      scroll-margin-top:80px;
+    }
+    /* petite animation non bloquante (bonus) */
+    section.visible{opacity:1;transform:translateY(0)}
+
+    h2{
+      font-size:2em;text-align:center;color:var(--primary);
+      margin-bottom:40px;position:relative;
+    }
+    h2::after{
+      content:"";position:absolute;width:80px;height:4px;background:var(--accent);
+      left:50%;transform:translateX(-50%);bottom:-10px;border-radius:2px;
     }
 
-    header {
-      text-align: center;
-      padding: 100px 20px 60px;
-      background: var(--primary);
-      color: #fff;
-      position: relative;
+    .project,.certificate{
+      background:var(--card-bg);
+      box-shadow:0 4px 20px var(--shadow);
+      border-radius:16px;padding:25px;margin:30px 0;
+      transition:transform .3s ease,box-shadow .3s ease;
+      backdrop-filter:blur(10px);
     }
-    header h1 { font-size: 3em; margin-bottom: 10px; }
-    header p { font-size: 1.2em; opacity: 0.9; }
-
-    #toggleMode {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #fff;
-      color: var(--primary);
-      border: none;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    #toggleMode:hover {
-      transform: scale(1.05);
-      background: var(--accent);
-      color: #fff;
-    }
-
-    nav {
-      text-align: center;
-      padding: 15px 0;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    nav a:hover { color: var(--accent); }
-
-    section {
-      max-width: 1000px;
-      margin: 80px auto;
-      padding: 20px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-out;
-    }
-    section.visible { opacity: 1; transform: translateY(0); }
-
-    h2 {
-      font-size: 2em;
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 40px;
-      position: relative;
-    }
-    h2::after {
-      content: "";
-      position: absolute;
-      width: 80px;
-      height: 4px;
-      background: var(--accent);
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -10px;
-      border-radius: 2px;
-    }
-
-    .project, .certificate {
-      background: var(--card-bg);
-      box-shadow: 0 4px 20px var(--shadow);
-      border-radius: 16px;
-      padding: 25px;
-      margin: 30px 0;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    .project:hover, .certificate:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px var(--shadow);
-    }
+    .project:hover,.certificate:hover{transform:translateY(-5px);box-shadow:0 8px 25px var(--shadow)}
 
     /* Slider */
-    .slider {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      margin-top: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .slides {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-    .slides img {
-      width: 100%;
-      flex-shrink: 0;
-      border-radius: 12px;
-    }
-    .prev, .next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.4);
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      z-index: 10;
-    }
-    .prev { left: 10px; }
-    .next { right: 10px; }
-    .prev:hover, .next:hover { background: rgba(0,0,0,0.7); }
+    .slider{position:relative;overflow:hidden;border-radius:12px;margin-top:15px;box-shadow:0 4px 15px rgba(0,0,0,.2)}
+    .slides{display:flex;transition:transform .5s ease-in-out}
+    .slides img{width:100%;flex-shrink:0;border-radius:12px;display:block} /* évite l’espace blanc */
 
-    /* Bouton GitHub flottant */
-    .slider a.github-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--primary);
-      color: #fff;
-      padding: 8px 15px;
-      border-radius: 25px;
-      font-weight: 600;
-      text-decoration: none;
-      opacity: 0;
-      transition: opacity 0.3s, transform 0.3s;
+    .prev,.next{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:rgba(0,0,0,.4);color:#fff;border:none;
+      padding:10px 15px;border-radius:50%;cursor:pointer;font-size:18px;z-index:10;
     }
-    .slider:hover a.github-btn { opacity: 1; transform: translateY(0); }
-    .slider a.github-btn:hover { background: var(--accent); }
+    .prev{left:10px}.next{right:10px}
+    .prev:hover,.next:hover{background:rgba(0,0,0,.7)}
 
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
+    .slider a.github-btn{
+      position:absolute;top:10px;right:10px;background:var(--primary);color:#fff;
+      padding:8px 15px;border-radius:25px;font-weight:600;text-decoration:none;
+      opacity:0;transition:opacity .3s,transform .3s;
     }
-    .skill {
-      background: var(--primary);
-      color: white;
-      padding: 12px;
-      text-align: center;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: transform 0.3s;
-    }
-    .skill:hover { transform: scale(1.05); }
+    .slider:hover a.github-btn{opacity:1;transform:translateY(0)}
+    .slider a.github-btn:hover{background:var(--accent)}
 
-    footer {
-      background: var(--primary);
-      color: #fff;
-      text-align: center;
-      padding: 40px 20px;
-      margin-top: 80px;
-    }
-    footer a {
-      color: #fff;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    footer a:hover { color: var(--accent); }
+    .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20px}
+    .skill{background:var(--primary);color:#fff;padding:12px;text-align:center;border-radius:8px;font-weight:600;transition:transform .3s}
+    .skill:hover{transform:scale(1.05)}
+
+    footer{background:var(--primary);color:#fff;text-align:center;padding:40px 20px;margin-top:80px}
+    footer a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold}
+    footer a:hover{color:var(--accent)}
   </style>
 </head>
 <body>
@@ -224,7 +136,7 @@
 
 <section id="about">
   <h2>À propos</h2>
-  <p style="text-align:center; max-width:800px; margin:auto;">
+  <p style="text-align:center;max-width:800px;margin:auto;">
     Je suis étudiant ingénieur passionné par le développement web et mobile. J’ai travaillé sur plusieurs projets académiques et personnels, en équipe comme en individuel, utilisant différentes technologies modernes. Je recherche actuellement un stage PFE en informatique pour mettre mes compétences en pratique et contribuer à des projets concrets.
   </p>
 </section>
@@ -347,41 +259,40 @@
 
 <script>
   // Mode sombre
-  const btn = document.getElementById("toggleMode");
-  btn.addEventListener("click", () => {
+  const btn=document.getElementById("toggleMode");
+  btn.addEventListener("click",()=>{
     document.body.classList.toggle("dark");
-    btn.textContent = document.body.classList.contains("dark") ? "☀️ Mode clair" : "🌙 Mode sombre";
+    btn.textContent=document.body.classList.contains("dark")?"☀️ Mode clair":"🌙 Mode sombre";
   });
 
-  // Animation des sections
-  const sections = document.querySelectorAll("section");
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add("visible");
-    });
-  }, { threshold: 0.2 });
-  sections.forEach(section => observer.observe(section));
+  // Animation légère (ne cache rien)
+  const sections=document.querySelectorAll("section");
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{ if(entry.isIntersecting) entry.target.classList.add("visible"); });
+  },{threshold:0.1});
+  sections.forEach((s)=>observer.observe(s));
 
   // Sliders
-  document.querySelectorAll('.project').forEach(project => {
-    const slides = project.querySelector('.slides');
-    const imgs = slides.querySelectorAll('img');
-    let index = 0;
+  document.querySelectorAll(".project").forEach((project)=>{
+    const slides=project.querySelector(".slides");
+    if(!slides) return;
+    const imgs=slides.querySelectorAll("img");
+    let index=0;
 
-    const prev = project.querySelector('.prev');
-    const next = project.querySelector('.next');
+    const prev=project.querySelector(".prev");
+    const next=project.querySelector(".next");
 
-    function showSlide(i) {
-      if(i < 0) index = imgs.length - 1;
-      else if(i >= imgs.length) index = 0;
-      else index = i;
-      slides.style.transform = `translateX(-${index * 100}%)`;
+    function showSlide(i){
+      if(i<0) index=imgs.length-1;
+      else if(i>=imgs.length) index=0;
+      else index=i;
+      slides.style.transform=`translateX(-${index*100}%)`;
     }
 
-    prev.addEventListener('click', () => showSlide(index - 1));
-    next.addEventListener('click', () => showSlide(index + 1));
+    if(prev) prev.addEventListener("click",()=>showSlide(index-1));
+    if(next) next.addEventListener("click",()=>showSlide(index+1));
 
-    setInterval(() => showSlide(index + 1), 5000);
+    setInterval(()=>showSlide(index+1),5000);
   });
 </script>
 
